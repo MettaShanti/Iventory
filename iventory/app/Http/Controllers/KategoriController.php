@@ -31,16 +31,17 @@ class KategoriController extends Controller
     {
         $input = $request->validate([
            
-            "pembagian1_id"       =>"required",
-            "pembagian1_nama"     =>"required",
-            "pembagian1_ket"      =>"required",
+            "nama_kategori"       =>"required",
+            "jenis"               =>"required",
+            "deskripsi"           =>"required",
+            "status"              =>"required"
 
         ]);
         //simpan
         kategori::create($input);
 
         //redirect beserta pesan sukses
-        return redirect()->route('kategori.index')->with('success', $request->.' Berhasil Disimpan');
+        return redirect()->route('kategori.index')->with('success', $request->nama_kategori.' Berhasil Disimpan');
     }
 
     /**
@@ -69,16 +70,17 @@ class KategoriController extends Controller
         $kategori = kategori::find($kategori);
         $input = $request->validate([
            
-            "pembagian1_id"       =>"required",
-            "pembagian1_nama"     =>"required",
-            "pembagian1_ket"      =>"required",
+            "nama_kategori"       =>"required",
+            "jenis"               =>"required",
+            "deskripsi"           =>"required",
+            "status"              =>"required"
 
         ]);
         //update
         $kategori->update($input);
 
         //redirect beserta pesan sukses
-        return redirect()->route('kategori.index')->with('success', $request->' Berhasil Diubah');
+        return redirect()->route('kategori.index')->with('success', $request->nama_kategori.' Berhasil Diubah');
     }
 
     /**

@@ -12,7 +12,8 @@ class StokbarangController extends Controller
      */
     public function index()
     {
-        //
+        $result = stokbarang::all();
+        return view('stokbarang.index')->with('stokbarang', $result);
     }
 
     /**
@@ -20,7 +21,7 @@ class StokbarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('stokbarang.create');
     }
 
     /**
@@ -28,7 +29,23 @@ class StokbarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+           
+            "kode_barang"      =>"required",
+            "nama_barang"      =>"required",
+            "jumlah"           =>"required",
+            "harga_jual"       =>"required",
+            "harga_pokok"      =>"required",
+            "tgl_masuk"        =>"required",
+            "tgl_expired"      =>"required",
+            "kategori_id"      =>"required"
+
+        ]);
+        //simpan
+        stokbarang::create($input);
+
+        //redirect beserta pesan sukses
+        return redirect()->route('stokbarang.index')->with('success', $request->nama_barang.' Berhasil Disimpan');
     }
 
     /**
@@ -44,15 +61,34 @@ class StokbarangController extends Controller
      */
     public function edit(stokbarang $stokbarang)
     {
-        //
+        //edit data
+        $stokbarang = stokbarang::find($stokbarang);
+        return view('stokbarang.edit')->with('stokbarang', $stokbarang);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, stokbarang $stokbarang)
+    public function update(Request $request, $stokbarang)
     {
-        //
+        $stokbarang = stokbarang::find($stokbarang);
+        $input = $request->validate([
+           
+            "kode_barang"      =>"required",
+            "nama_barang"      =>"required",
+            "jumlah"           =>"required",
+            "harga_jual"       =>"required",
+            "harga_pokok"      =>"required",
+            "tgl_masuk"        =>"required",
+            "tgl_expired"      =>"required",
+            "kategori_id"      =>"required"
+
+        ]);
+        //update
+        $stokbarang->update($input);
+
+        //redirect beserta pesan sukses
+        return redirect()->route('stokbarang.index')->with('success', $request->nama_barang.' Berhasil Diubah');
     }
 
     /**
@@ -60,6 +96,11 @@ class StokbarangController extends Controller
      */
     public function destroy(stokbarang $stokbarang)
     {
-        //
+        $stokbarang = stokbarang::find($stokbarang);
+        if (!$stokbarang) {
+        return redirect()->route('stokbarang.index')->with('error', 'Data not found.');
+        }
+        $stokbarang->delete();
+        return redirect()->route('stokbarang.index')->with('success', 'Data Jabatan Berhasil di Hapus');
     }
 }
