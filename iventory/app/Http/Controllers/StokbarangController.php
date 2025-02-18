@@ -48,6 +48,32 @@ class StokbarangController extends Controller
         return redirect()->route('stokbarang.index')->with('success', $request->nama_barang.' Berhasil Disimpan');
     }
 
+    // filter 
+    public function filter(Request $request)
+{
+    $result = stokbarang::all();
+    // dd($request);
+
+    // Validasi input tanggal
+    $request->validate([
+        'tgl_mulai' => 'required|date',
+        'tgl_selesai' => 'required|date|after_or_equal:tgl_mulai',
+    ]);
+
+    // Ambil input tanggal dari request
+    $mulai = $request->input('tgl_mulai');
+    $selesai = $request->input('tgl_selesai');
+
+    // Ambil data berdasarkan rentang tanggal pada `scan_awal` dan `scan_akhir`
+    $stokbarang = stokbarang::whereBetween('tgl_masuk', [$mulai, $selesai])
+                 ->orWhereBetween('tgl_expired', [$mulai, $selesai])
+                 ->orderBy('tgl_masuk', 'asc')
+                 ->get();
+
+    // Kirim data hasil filter ke view 'laporan.index'
+    return view('stokbarang.index', ['stokbarang' => $stokbarang]);
+}
+
     /**
      * Display the specified resource.
      */

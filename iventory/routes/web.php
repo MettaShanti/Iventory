@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::post('/stokbarang/filter', [StokbarangController::class, 'filter'])->name('stokbarang.filter');
+
 Route::resource('kategori', KategoriController::class);
 Route::resource('stokbarang', StokbarangController::class);
 require __DIR__.'/auth.php';
