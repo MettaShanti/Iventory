@@ -3,8 +3,8 @@
 @section('content')
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">Data Supplier</h4>
-            <a href="{{ route('supplier.create') }}" class="btn btn-primary btn-sm">Tambah Supplier</a>
+            <h4 class="mb-0">Data Stok</h4>
+            <a href="{{ route('stok.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
         </div>
         <div class="card-body">
             <table id="supplierTable" class="table table-bordered table-striped table-hover nowrap" style="width:100%">
@@ -18,14 +18,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($supplier as $index => $row)
+                    @foreach ($stok as $index => $row)
                         <tr>
                             <td>{{ $row->nama }}</td>
                             <td>{{ $row->alamat }}</td>
                             <td>{{ $row->nohp }}</td>
                             <td>
-                                <a href="{{ route('supplier.edit', $row->id) }}" class="btn btn-warning btn-sm">Ubah</a>
-                                <form action="{{ route('supplier.destroy', $row->id) }}" method="POST" style="display:inline-block;">
+                                <a href="{{ route('stok.edit', $row->id) }}" class="btn btn-warning btn-sm">Ubah</a>
+                                <form action="{{ route('stok.destroy', $row->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</button>
