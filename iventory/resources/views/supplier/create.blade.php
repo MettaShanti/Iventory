@@ -5,8 +5,8 @@
 <form action="{{ route('pembagian3.store')}}" method="post">
     @csrf
 
-    Id Divisi
-    @error('pembagian3_id')
+    Nama
+    @error('nama')
         <span class="text-danger">({{ $message }})</span>
     @enderror
     <input type="number" name="pembagian3_id" id="" class="form-control mb-2">
