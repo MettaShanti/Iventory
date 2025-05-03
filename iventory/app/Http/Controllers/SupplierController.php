@@ -25,7 +25,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('produkMasuk.create');
+        return view('supplier.create');
     }
 
     /**
