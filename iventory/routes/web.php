@@ -1,12 +1,16 @@
 <?php
 
-use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProdukKeluarController;
+use App\Http\Controllers\ProdukMasukController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StokbarangController;
+use App\Http\Controllers\StokController;
+use App\Http\Controllers\SupplierController;
+use App\Models\produk;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('main');
 });
 
 Route::get('/dashboard', function () {
@@ -19,8 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/stokbarang/filter', [StokbarangController::class, 'filter'])->name('stokbarang.filter');
+Route::resource('produk', ProdukController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
+Route::resource('produkMasuk', ProdukMasukController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
+Route::resource('produkKeluar', ProdukKeluarController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
+Route::resource('supplier', SupplierController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
+Route::resource('stok', StokController::class);//->middleware(['auth', 'verified', 'Ceklevel:user']);
 
-Route::resource('kategori', KategoriController::class);
-Route::resource('stokbarang', StokbarangController::class);
+
 require __DIR__.'/auth.php';
