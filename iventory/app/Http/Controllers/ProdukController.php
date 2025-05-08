@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\produk;
+use App\Models\supplier;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -25,7 +26,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.create');
+        $suppliers = supplier::all();
+        return view('produk.create')->with('supplier', $suppliers);
     }
 
     /**
@@ -59,11 +61,12 @@ class ProdukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id_produk)
+    public function edit($id)
     {
         // edit data
-        $produk = produk::find($id_produk);
-        return view('produk.edit')->with('produk', $produk);
+        $suppliers = supplier::all();
+        $produk = produk::find($id);
+        return view('produk.edit')->with('produk', $produk)->with('suppliers', $suppliers);
     }
 
     /**

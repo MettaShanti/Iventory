@@ -84,7 +84,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Supplier
                             </a>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Manajemen User
                             </a>
