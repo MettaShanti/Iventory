@@ -2,7 +2,7 @@
 
 @section('content')
 <h4>Divisi</h4>
-<form action="{{ route('supplier.store')}}" method="post">
+<form action="{{ route('stok.store')}}" method="post">
     @csrf
 
     Nama
