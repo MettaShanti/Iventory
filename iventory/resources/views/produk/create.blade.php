@@ -1,45 +1,33 @@
 @extends('layouts.main')
 
 @section('content')
-<h4>Tambah Data Produk</h4>
-<form action="{{ route('produk.store') }}" method="post">
+<h4>Tambah Produk</h4>
+
+<form action="{{ route('produk.store') }}" method="POST">
     @csrf
 
     <label>Nama Produk</label>
-    @error('nama_produk')
-        <span class="text-danger">({{ $message }})</span>
-    @enderror
-    <input type="text" name="nama_produk" class="form-control mb-2" required>
+    <input type="text" name="nama_produk" class="form-control mb-2">
 
-    <label>Jenis</label>
-    @error('jenis')
-        <span class="text-danger">({{ $message }})</span>
-    @enderror
-    <input type="text" name="jenis" class="form-control mb-2" required>
+    <label>Jenis Produk</label>
+    <input type="text" name="jenis" class="form-control mb-2" >
 
     <label>Harga</label>
-    @error('harga')
-        <span class="text-danger">({{ $message }})</span>
-    @enderror
-    <input type="number" name="harga" class="form-control mb-2" required>
+    <input type="number" name="harga" class="form-control mb-2">
 
     <label>Satuan</label>
-    @error('satuan')
-        <span class="text-danger">({{ $message }})</span>
-    @enderror
-    <input type="text" name="satuan" class="form-control mb-2" required>
+    <input type="text" name="satuan" class="form-control mb-2">
 
     <label>Supplier</label>
-    @error('supplier_id')
-        <span class="text-danger">({{ $message }})</span>
-    @enderror 
-    <select name="supplier_id" class="form-control" required>
-        <option value="">Pilih Supplier</option>
-        @foreach ($suppliers as $item)
-            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+    <select name="supplier_id" class="form-control mb-2">
+        <option value="">-- Pilih Supplier --</option>
+        @foreach($supplier as $item)
+            <option value="{{ $item->id }}" {{ old('supplier_id') == $item->id ? 'selected' : '' }}>
+                {{ $item->nama }}
+            </option>
         @endforeach
     </select>
 
-    <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+    <button class="btn btn-primary mt-2" type="submit">Simpan</button>
 </form>
 @endsection

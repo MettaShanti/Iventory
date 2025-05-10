@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\produk;
 use App\Models\supplier;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -26,29 +27,53 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $suppliers = supplier::all();
-        return view('produk.create')->with('supplier', $suppliers);
+        $supplier = supplier::all();
+        return view('produk.create')->with('supplier', $supplier);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //validasi input nama imput disamakan dengan tabel kolom
-        $input = $request->validate([
-            "nama_produk"  =>"required",
-            "jenis"        =>"required",
-            "harga"        =>"required",
-            "satuan"       =>"required",
-            "supplier_id"  =>"required",
-        ]);
-        //simpan
-        produk::create($input);
+{
+    $input = $request->validate([   
+        "nama_produk"  => "required",
+        "jenis"        => "required",
+        "harga"        => "required|numeric",
+        "satuan"       => "required",
+        "supplier_id"  => "required|exists:suppliers,id",
+    ]);
 
-        //redirect beserta pesan sukses
-        return redirect()->route('produk.index')->with('success', $request->nama_produk.' Berhasil Disimpan');
+    // Gunakan transaction untuk menghindari duplikat kode
+    DB::beginTransaction();
+
+    try {
+        // Ambil id terakhir yang digunakan (bukan hanya id, tapi urutan berdasarkan kode)
+        $lastKode = Produk::orderByDesc('id')->first()?->kode_produk;
+
+        if ($lastKode) {
+            $lastNumber = (int) substr($lastKode, 1); // hapus huruf "P"
+            $nextNumber = $lastNumber + 1;
+        } else {
+            $nextNumber = 1;
+        }
+
+        $kodeProduk = 'P' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+
+        $input['kode_produk'] = $kodeProduk;
+
+        Produk::create($input);
+
+        DB::commit();
+
+        return redirect()->route('produk.index')->with('success', $request->nama_produk . ' Berhasil Disimpan');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->withErrors(['error' => 'Gagal menyimpan data produk: ' . $e->getMessage()]);
     }
+}
+
 
     /**
      * Display the specified resource.
@@ -64,9 +89,9 @@ class ProdukController extends Controller
     public function edit($id)
     {
         // edit data
-        $suppliers = supplier::all();
         $produk = produk::find($id);
-        return view('produk.edit')->with('produk', $produk)->with('suppliers', $suppliers);
+        $supplier = supplier::all();
+        return view('produk.edit')->with('produk', $produk)->with('supplier', $supplier);
     }
 
     /**

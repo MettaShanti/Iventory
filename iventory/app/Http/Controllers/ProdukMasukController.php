@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\produk;
 use App\Models\produkMasuk;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class ProdukMasukController extends Controller
      */
     public function create()
     {
-        return view('produkMasuk.create');
+        $produk = produk::all();
+        return view('produkMasuk.create')->with('produk', $produk);
     }
 
     /**
@@ -35,19 +37,23 @@ class ProdukMasukController extends Controller
     {
         //validasi input nama imput disamakan dengan tabel kolom
         $input = $request->validate([
-            "nama_produk"   =>"required",
+            "produk_id"     =>"required",
             "tgl_masuk"     =>"required",
             "tgl_produksi"  =>"required",
             "tgl_exp"       =>"required",
             "jumlah"        =>"required",
-            "produk_id"     =>"required",
         ]);
+        // Ambil produk berdasarkan ID
+        $produk = Produk::findOrFail($request->produk_id);
+
+    // Tambahkan nama_produk ke input jika kamu memang menyimpannya di tabel produk_masuks
+    $input['nama_produk'] = $produk->nama_produk;
 
         //simpan
         produkMasuk::create($input);
 
         //redirect beserta pesan sukses
-        return redirect()->route('produkMasuk.index')->with('success', $request->nama_produk.' Berhasil Disimpan');
+        return redirect()->route('produkMasuk.index')->with('success', $request->nama_roduk.' Berhasil Disimpan');
     }
 
     /**
@@ -64,8 +70,16 @@ class ProdukMasukController extends Controller
     public function edit($id)
     {
         // edit data
-        $produkMasuk = produkMasuk::find($id);
-        return view('produkMasuk.edit')->with('produkMasuk', $produkMasuk);
+        $produkMasuk = produkMasuk::findOrFail($id); // Data yang akan diedit
+        $produk = produk::all(); // Ambil semua produk untuk dropdown
+
+        return view('produkMasuk.edit', [
+        'produkMasuk' => $produkMasuk,
+        'produk' => $produk // kirim ke view
+    ]);
+        //$produk = produk::find($id);
+        //$produkMasuk = produkMasuk::find($id);
+        //return view('produkMasuk.edit')->with('produkMasuk', $produkMasuk)->with('produk', $produk);
     }
 
     /**
@@ -75,13 +89,11 @@ class ProdukMasukController extends Controller
     {
         $produkMasuk = produkMasuk::find($id);
         $input = $request->validate([
-           
-           "nama_produk"   =>"required",
+            "produk_id"     =>"required",
             "tgl_masuk"     =>"required",
             "tgl_produksi"  =>"required",
             "tgl_exp"       =>"required",
             "jumlah"        =>"required",
-            "produk_id"     =>"required",
 
         ]);
         //update

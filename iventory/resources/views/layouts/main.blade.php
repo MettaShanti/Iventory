@@ -29,9 +29,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-        <img src="{{ asset ('img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Persedian Produk 
-            CV Jaya Abadi</span>
+        <span class="ms-1 font-weight-bold">Persedian Produk CV Jaya Abadi</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -75,7 +73,7 @@
       <div class="collapse" id="collapseProduk" data-bs-parent="#accordionSidenav">
         <ul class="nav flex-column ms-4">
           <li class="nav-item"><a class="nav-link" href="{{ route('produk.index') }}">Produk</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Stok</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('stok.index') }}">Stok</a></li>
         </ul>
       </div>
     </li>
@@ -99,7 +97,7 @@
 
       <!-- Items lainnya -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('produkMasuk.index') }}">
           <div class="icon icon-shape icon-sm shadow bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fas fa-arrow-circle-down text-dark"></i>
           </div>
@@ -107,7 +105,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('produkKeluar.index') }}">
           <div class="icon icon-shape icon-sm shadow bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fas fa-arrow-circle-up text-dark"></i>
           </div>

@@ -45,7 +45,7 @@ class ProdukKeluarController extends Controller
         produkKeluar::create($input);
 
         //redirect beserta pesan sukses
-        return redirect()->route('produkKeluar.index')->with('success', $request->namap_roduk.' Berhasil Disimpan');
+        return redirect()->route('produkKeluar.index')->with('success', $request->nama_roduk.' Berhasil Disimpan');
     }
 
     /**
