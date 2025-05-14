@@ -21,7 +21,7 @@
             @foreach ($produkMasuk as $row)
             <tr>
                 <td>{{ $row->kode_produk ?? 'N/A' }}</td>
-                <td>{{ $row->nama_produk ?? 'N/A' }}</td>
+                <td>{{ $row->nama_produk }}</td>
                 <td>{{ $row->tgl_masuk }}</td>
                 <td>{{ $row->tgl_produksi }}</td>
                 <td>{{ $row->tgl_exp }}</td>

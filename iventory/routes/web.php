@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdukMasukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
 use App\Models\produk;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::resource('produkMasuk', ProdukMasukController::class);//->middleware(['au
 Route::resource('produkKeluar', ProdukKeluarController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
 Route::resource('supplier', SupplierController::class);//->middleware(['auth', 'verified', 'Ceklevel:admin']);
 Route::resource('stok', StokController::class);//->middleware(['auth', 'verified', 'Ceklevel:user']);
+Route::resource('user', UserController::class);//->middleware(['auth', 'verified', 'Ceklevel:user']);
 
 
 require __DIR__.'/auth.php';
