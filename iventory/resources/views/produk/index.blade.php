@@ -18,17 +18,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($produk as $item)
+            @foreach($produk as $row)
             <tr>
-                <td>{{ $item->kode_produk }}</td>
-                <td>{{ $item->nama_produk }}</td>
-                <td>{{ $item->jenis }}</td>
-                <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
-                <td>{{ $item->satuan }}</td>
-                <td>{{ $item->supplier->nama ?? '-' }}</td>
+                <td>{{ $row->kode_produk ?? N/A }}</td>
+                <td>{{ $row->nama_produk }}</td>
+                <td>{{ $row->jenis }}</td>
+                <td>Rp{{ number_format($row->harga, 0, ',', '.') }}</td>
+                <td>{{ $row->satuan }}</td>
+                <td>{{ $row->supplier->nama ?? '-' }}</td>
                 <td>
-                    <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('produk.destroy', $item->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('produk.destroy', $row->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button onclick="return confirm('Hapus produk ini?')" class="btn btn-danger btn-sm">Hapus</button>

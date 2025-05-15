@@ -10,6 +10,7 @@
                 <th>Nama User</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Role</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <td>{{ $row['name']}}</td>
                 <td>{{ $row['email']}}</td>
                 <td>{{ $row['password']}}</td>
+                <td>{{ $row['role']}}</td>
                 {{-- untuk membuat btn ubah --}}
                 <td><a href="{{ route('user.edit', $row ['id'] )}}" class="btn btn-xs btn-warning">UBAH</a>
                     {{-- untuk membuat btn hapus --}}
@@ -35,5 +37,4 @@
         </table>
 @endsection
 
-onclick="return confirm('Yakin ingin hapus data ini?')"
 

@@ -37,6 +37,7 @@ class ProdukController extends Controller
     public function store(Request $request)
 {
     $input = $request->validate([   
+        "kode_produk"  => "required",
         "nama_produk"  => "required",
         "jenis"        => "required",
         "harga"        => "required|numeric",
@@ -102,6 +103,7 @@ class ProdukController extends Controller
         //validasi input nama imput disamakan dengan tabel kolom
         $produk = produk::find($id);
         $input = $request->validate([
+            "kode_produk"  =>"required",
             "nama_produk"  =>"required",
             "jenis"        =>"required",
             "harga"        =>"required",

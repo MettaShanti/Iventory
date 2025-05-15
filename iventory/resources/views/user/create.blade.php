@@ -22,6 +22,12 @@
     @enderror 
     <input type="number" name="password" id="" class="form-control mb-2">
 
+    Role
+    @error('role')
+        <span class="text-danger">({{ $message }})</span>
+    @enderror 
+    <input type="text" name="role" id="" class="form-control mb-2">
+
     <button type="submit" class="btn btn-primary">Simpan</button>
 
 @endsection

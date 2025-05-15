@@ -38,6 +38,7 @@ class ProdukMasukController extends Controller
         //validasi input nama imput disamakan dengan tabel kolom
         $input = $request->validate([
             "produk_id"     =>"required",
+            "kode_produk"   =>"required",
             "tgl_masuk"     =>"required",
             "tgl_produksi"  =>"required",
             "tgl_exp"       =>"required",
@@ -90,6 +91,7 @@ class ProdukMasukController extends Controller
         $produkMasuk = produkMasuk::find($id);
         $input = $request->validate([
             "produk_id"     =>"required",
+            "kode_produk"   =>"required",
             "tgl_masuk"     =>"required",
             "tgl_produksi"  =>"required",
             "tgl_exp"       =>"required",

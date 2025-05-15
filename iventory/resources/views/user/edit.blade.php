@@ -2,16 +2,16 @@
 @extends('layouts.main')
 
 @section('content')
-    <h4>Fakultas</h4>
+    <h4>Edit Data Users</h4>
     <form action="{{ route('user.update', $user['id'])}}" method="post">
     @csrf
     @method('PUT') 
     
-    Nama 
+    Nama Users
     @error('name')
         <span class="text-danger">({{ $message }})</span>
     @enderror
-    <input type="text" name="name" id="" class="form-control mb-2" value="{{ $user['nama']}}">
+    <input type="text" name="name" id="" class="form-control mb-2" value="{{ $user['name']}}">
     
     Email
     @error('email')
@@ -23,7 +23,13 @@
     @error('password')
         <span class="text-danger">({{ $message }})</span>
     @enderror 
-    <input type="text" name="password" id="" class="form-control mb-2" value="{{ $user['password']}}">
+    <input type="number" name="password" id="" class="form-control mb-2" value="{{ $user['password']}}">
+
+    Role
+    @error('role')
+        <span class="text-danger">({{ $message }})</span>
+    @enderror 
+    <input type="text" name="role" id="" class="form-control mb-2" value="{{ $user['role']}}">
 
     <button type="submit" class="btn btn-primary">SIMPAN</button>
     </form>

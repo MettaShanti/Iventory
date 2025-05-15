@@ -35,6 +35,7 @@ class ProdukKeluarController extends Controller
     {
         //validasi input nama, input disamakan dengan tabel kolom
         $input = $request->validate([
+            "kode_produk"   =>"required",
             "nama_produk"   =>"required",
             "tgl_keluar"    =>"required",
             "tgl_exp"       =>"required",
@@ -73,6 +74,7 @@ class ProdukKeluarController extends Controller
     {
         $produkKeluar = produkKeluar::find($id);
         $input = $request->validate([
+            "kode_produk"   =>"required",
             "nama_produk"   =>"required",
             "tgl_keluar"    =>"required",
             "tgl_exp"       =>"required",
