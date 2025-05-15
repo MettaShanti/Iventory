@@ -51,25 +51,6 @@
     @enderror 
     <input type="number" name="jumlah" class="form-control mb-2" value="{{ isset($produkMasuk) ? $produkMasuk->jumlah : '' }}">
 
-    <button type="submit" class="btn btn-primary mt-3">
-        {{ isset($produkMasuk) ? 'Update' : 'Simpan' }}
-    </button>
 </form>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const kodeProdukSelect = document.getElementById('kode_produk');
-        const namaProdukInput = document.getElementById('nama_produk');
-
-        function updateNamaProduk() {
-            const selected = kodeProdukSelect.options[kodeProdukSelect.selectedIndex];
-            namaProdukInput.value = selected.getAttribute('data-nama') || '';
-        }
-
-        kodeProdukSelect.addEventListener('change', updateNamaProduk);
-
-        // Set nama produk saat halaman pertama kali dibuka (edit mode)
-        updateNamaProduk();
-    });
-</script>
 
 @endsection
